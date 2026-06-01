@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Chihuatón TEBAEV Chocamán - Evento de adopción responsable de perros en telebachillerato rural">
     <title>Chihuatón TEBAEV Chocamán | Evento de Adopción</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ===== VARIABLES Y RESET ===== */
         :root {
-            --color-primario: #003366;
-            --color-secundario: #FF6600;
-            --color-acento: #28A745;
-            --color-fondo: #F8F9FA;
-            --color-texto: #333333;
-            --color-blanco: #FFFFFF;
-            --sombra: 0 4px 6px rgba(0,0,0,0.1);
-            --sombra-lg: 0 10px 25px rgba(0,0,0,0.15);
+            --color-primario: #5B9BD5;
+            --color-primario-oscuro: #3A7CA5;
+            --color-secundario: #FF8C42;
+            --color-acento: #4CAF50;
+            --color-fondo: #0a0a0a;
+            --color-card: #1a1a1a;
+            --color-card-hover: #252525;
+            --color-texto: #f5f5f5;
+            --color-texto-secundario: #b0b0b0;
+            --color-blanco: #ffffff;
+            --sombra: 0 4px 12px rgba(0,0,0,0.4);
+            --sombra-lg: 0 8px 30px rgba(0,0,0,0.6);
+            --borde-card: 1px solid rgba(255,255,255,0.1);
+            --transicion: all 0.3s ease;
         }
 
         * {
@@ -29,21 +36,27 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
             background-color: var(--color-fondo);
             color: var(--color-texto);
-            line-height: 1.6;
+            line-height: 1.7;
+            font-weight: 300;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(91, 155, 213, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(255, 140, 66, 0.08) 0%, transparent 25%);
         }
 
         /* ===== BARRA DE NAVEGACIÓN ===== */
         .navbar {
-            background: linear-gradient(135deg, var(--color-primario), #0055A4);
+            background: rgba(10, 10, 10, 0.92);
+            backdrop-filter: blur(10px);
             padding: 1rem 2rem;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--sombra-lg);
+            box-shadow: var(--sombra);
+            border-bottom: var(--borde-card);
         }
 
         .nav-container {
@@ -56,31 +69,55 @@
 
         .nav-logo {
             color: var(--color-blanco);
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.4rem;
+            font-weight: 400;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.7rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-logo i {
+            font-size: 1.6rem;
+            color: var(--color-primario);
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.8rem;
             align-items: center;
         }
 
         .nav-menu a {
-            color: var(--color-blanco);
+            color: var(--color-texto);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            padding: 0.5rem;
+            font-weight: 300;
+            font-size: 0.95rem;
+            transition: var(--transicion);
+            padding: 0.5rem 0.3rem;
+            position: relative;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-secundario);
+            transition: var(--transicion);
         }
 
         .nav-menu a:hover {
-            color: var(--color-secundario);
+            color: var(--color-primario);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
         }
 
         .hamburger {
@@ -88,23 +125,23 @@
             flex-direction: column;
             cursor: pointer;
             padding: 0.5rem;
+            gap: 5px;
         }
 
         .hamburger span {
             width: 25px;
-            height: 3px;
+            height: 2px;
             background-color: var(--color-blanco);
-            margin: 3px 0;
-            transition: 0.3s;
-            border-radius: 3px;
+            transition: var(--transicion);
+            border-radius: 2px;
         }
 
         /* ===== HERO SECTION CON IMAGEN ===== */
         .hero {
             margin-top: 70px;
-            background: linear-gradient(rgba(0,51,102,0.85), rgba(0,51,102,0.85)),
-                        url('ch1.jpg') center/cover;
-            min-height: 600px;
+            background: linear-gradient(rgba(10,10,10,0.75), rgba(10,10,10,0.85)),
+                        url('ch1.jpg') center/cover no-repeat;
+            min-height: 650px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -114,53 +151,88 @@
             position: relative;
         }
 
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(10,10,10,0.9) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 1.5rem;
+        }
+
         .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            font-size: 3.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
             animation: fadeInDown 1s ease;
         }
 
         .hero-content p {
-            font-size: 1.4rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
+            font-size: 1.3rem;
+            max-width: 750px;
+            margin: 0 auto 2.2rem;
+            font-weight: 300;
+            opacity: 0.95;
             animation: fadeInUp 1s ease 0.3s both;
         }
 
         .btn-principal {
-            display: inline-block;
-            background-color: var(--color-secundario);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: linear-gradient(135deg, var(--color-secundario), #E67329);
             color: var(--color-blanco);
-            padding: 1rem 2.5rem;
+            padding: 1rem 2.3rem;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s;
+            font-weight: 400;
+            font-size: 1.05rem;
+            transition: var(--transicion);
             box-shadow: var(--sombra-lg);
             animation: fadeInUp 1s ease 0.6s both;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-principal i {
+            font-size: 1.1rem;
         }
 
         .btn-principal:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255,102,0,0.4);
+            box-shadow: 0 12px 35px rgba(255, 140, 66, 0.45);
+            background: linear-gradient(135deg, #E67329, var(--color-secundario));
         }
 
         /* ===== SECCIONES GENERALES ===== */
         .seccion {
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .titulo-seccion {
             text-align: center;
-            font-size: 2.5rem;
-            color: var(--color-primario);
-            margin-bottom: 3rem;
+            font-size: 2.3rem;
+            color: var(--color-blanco);
+            margin-bottom: 3.5rem;
             position: relative;
-            padding-bottom: 1rem;
+            padding-bottom: 1.2rem;
+            font-weight: 300;
+            letter-spacing: -0.5px;
         }
 
         .titulo-seccion::after {
@@ -169,31 +241,59 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background-color: var(--color-secundario);
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-primario), transparent);
             border-radius: 2px;
         }
 
-        /* ===== GALERÍA DE IMÁGENES ===== */
+        .seccion-texto {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--color-texto-secundario);
+            font-weight: 300;
+        }
+
+        .seccion-texto strong {
+            color: var(--color-primario);
+            font-weight: 400;
+        }
+
+        /* ===== GALERÍA DE IMÁGENES CON ZOOM ===== */
+        .galeria-container {
+            background: var(--color-card);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem auto;
+            border: var(--borde-card);
+            box-shadow: var(--sombra);
+        }
+
         .galeria {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1.5rem;
         }
 
         .galeria-item {
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: var(--sombra);
-            transition: transform 0.3s;
-            height: 300px;
+            transition: var(--transicion);
+            height: 280px;
+            position: relative;
+            cursor: zoom-in;
+            border: var(--borde-card);
         }
 
         .galeria-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
             box-shadow: var(--sombra-lg);
+            border-color: rgba(91, 155, 213, 0.4);
         }
 
         .galeria-item img {
@@ -201,64 +301,171 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .galeria-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .galeria-item::after {
+            content: '\f00e';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(10,10,10,0.75);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: var(--transicion);
+            border: 2px solid var(--color-primario);
+        }
+
+        .galeria-item:hover::after {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Lightbox para zoom */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 5, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transicion);
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+            border: 3px solid var(--color-primario);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            color: white;
+            font-size: 2.2rem;
+            cursor: pointer;
+            transition: var(--transicion);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.15);
+        }
+
+        .lightbox-close:hover {
+            background: var(--color-secundario);
+            transform: rotate(90deg);
         }
 
         /* ===== ACTIVIDADES ===== */
         .actividades-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 1.8rem;
             margin-top: 2rem;
         }
 
         .actividad-card {
-            background: var(--color-blanco);
-            border-radius: 12px;
-            padding: 2rem;
+            background: var(--color-card);
+            border-radius: 18px;
+            padding: 2.2rem;
             box-shadow: var(--sombra);
-            border-left: 5px solid var(--color-secundario);
-            transition: all 0.3s;
+            border-left: 4px solid var(--color-primario);
+            transition: var(--transicion);
+            border: var(--borde-card);
         }
 
         .actividad-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
             box-shadow: var(--sombra-lg);
+            background: var(--color-card-hover);
+            border-left-color: var(--color-secundario);
         }
 
         .actividad-card h3 {
-            color: var(--color-primario);
-            margin-bottom: 1rem;
+            color: var(--color-blanco);
+            margin-bottom: 1.1rem;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            font-size: 1.4rem;
+            gap: 0.9rem;
+            font-size: 1.35rem;
+            font-weight: 400;
+            letter-spacing: -0.3px;
         }
 
-        .icono {
-            font-size: 2rem;
+        .actividad-card h3 i {
+            color: var(--color-primario);
+            font-size: 1.5rem;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .actividad-card p {
+            color: var(--color-texto-secundario);
+            font-weight: 300;
+            line-height: 1.7;
         }
 
         /* ===== CRONOGRAMA ===== */
-        .cronograma {
-            background: var(--color-blanco);
-            border-radius: 12px;
-            padding: 2.5rem;
+        .cronograma-container {
+            background: var(--color-card);
+            border-radius: 20px;
+            padding: 2.8rem;
             box-shadow: var(--sombra);
+            border: var(--borde-card);
         }
 
         .cronograma-item {
             display: flex;
             align-items: flex-start;
-            gap: 1.5rem;
-            padding: 1.5rem 0;
-            border-bottom: 2px dashed #e0e0e0;
-            transition: background 0.3s;
+            gap: 1.8rem;
+            padding: 1.6rem 0;
+            border-bottom: 1px dashed rgba(255,255,255,0.12);
+            transition: var(--transicion);
         }
 
         .cronograma-item:hover {
-            background: #f8f9fa;
-            padding-left: 1rem;
-            border-radius: 8px;
+            background: var(--color-card-hover);
+            padding-left: 0.8rem;
+            padding-right: 0.8rem;
+            border-radius: 12px;
+            margin: 0 -0.8rem;
         }
 
         .cronograma-item:last-child {
@@ -266,158 +473,477 @@
         }
 
         .hora {
-            background: linear-gradient(135deg, var(--color-primario), #0055A4);
+            background: linear-gradient(135deg, var(--color-primario-oscuro), var(--color-primario));
             color: white;
-            padding: 0.5rem 1.2rem;
-            border-radius: 25px;
-            font-weight: bold;
-            min-width: 100px;
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            font-weight: 400;
+            min-width: 110px;
             text-align: center;
             flex-shrink: 0;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 15px rgba(58, 124, 165, 0.35);
         }
 
-        /* ===== UBICACIÓN ===== */
+        .cronograma-item strong {
+            color: var(--color-blanco);
+            font-weight: 400;
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+        }
+
+        .cronograma-item div {
+            color: var(--color-texto-secundario);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ===== UBICACIÓN CON MAPA ===== */
         .ubicacion-box {
-            background: linear-gradient(135deg, var(--color-primario), #004499);
-            color: white;
-            border-radius: 16px;
-            padding: 3rem;
+            background: linear-gradient(135deg, #151515, #1a1a1a);
+            color: var(--color-blanco);
+            border-radius: 20px;
+            padding: 2.8rem;
             text-align: center;
             box-shadow: var(--sombra-lg);
+            border: var(--borde-card);
         }
 
         .ubicacion-box h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.9rem;
+            margin-bottom: 1.6rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .ubicacion-box h3 i {
+            color: var(--color-secundario);
+        }
+
+        .ubicacion-box p {
+            font-size: 1.15rem;
+            margin-bottom: 1.2rem;
+            color: var(--color-texto-secundario);
+            font-weight: 300;
+        }
+
+        .ubicacion-box strong {
+            color: var(--color-blanco);
+            font-weight: 400;
+        }
+
+        .mapa-container {
+            margin: 2rem 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: var(--borde-card);
+            height: 300px;
+            background: #1e1e1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .mapa-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(20%) contrast(1.1) brightness(0.95);
+        }
+
+        .mapa-placeholder {
+            position: absolute;
+            color: var(--color-texto-secundario);
+            text-align: center;
+            padding: 1rem;
+            font-weight: 300;
+        }
+
+        .mapa-placeholder i {
+            font-size: 3rem;
+            color: var(--color-primario);
+            margin-bottom: 1rem;
+            display: block;
         }
 
         .ubicacion-box a {
             color: var(--color-secundario);
-            font-weight: bold;
+            font-weight: 400;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             margin-top: 1rem;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            transition: var(--transicion);
         }
 
         .ubicacion-box a:hover {
-            text-decoration: underline;
+            color: var(--color-primario);
+            gap: 0.8rem;
+        }
+
+        .ubicacion-box a i {
+            font-size: 1.1rem;
+        }
+
+        .ubicacion-detalles {
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            margin-top: 1.8rem;
+            flex-wrap: wrap;
+            font-weight: 300;
+            color: var(--color-texto-secundario);
+        }
+
+        .ubicacion-detalles span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ubicacion-detalles i {
+            color: var(--color-acento);
         }
 
         /* ===== ADOPCIÓN ===== */
         .adopcion-destacado {
-            background: linear-gradient(135deg, var(--color-acento), #218838);
-            color: white;
-            border-radius: 16px;
+            background: linear-gradient(135deg, #1a2a2a, #152525);
+            color: var(--color-blanco);
+            border-radius: 20px;
             padding: 3rem;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+            box-shadow: 0 10px 35px rgba(76, 175, 80, 0.25);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            margin: 2rem 0;
         }
 
         .adopcion-destacado h2 {
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
+            font-size: 2.1rem;
+            margin-bottom: 1.4rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .adopcion-destacado h2 i {
+            color: var(--color-acento);
+        }
+
+        .adopcion-destacado > p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--color-texto-secundario);
+            font-weight: 300;
+            line-height: 1.7;
         }
 
         .requisitos {
             text-align: left;
-            max-width: 600px;
-            margin: 2rem auto;
-            background: rgba(255,255,255,0.15);
+            max-width: 650px;
+            margin: 2.2rem auto;
+            background: rgba(255,255,255,0.06);
             padding: 2rem;
-            border-radius: 12px;
+            border-radius: 16px;
+            border: var(--borde-card);
+        }
+
+        .requisitos h3 {
+            margin-bottom: 1.3rem;
+            font-size: 1.35rem;
+            color: var(--color-blanco);
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .requisitos h3 i {
+            color: var(--color-acento);
         }
 
         .requisitos ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         .requisitos li {
-            padding: 0.8rem 0;
-            padding-left: 2rem;
+            padding: 0.9rem 0;
+            padding-left: 2.2rem;
             position: relative;
+            color: var(--color-texto-secundario);
+            font-weight: 300;
+            border-bottom: 1px dashed rgba(255,255,255,0.08);
+        }
+
+        .requisitos li:last-child {
+            border-bottom: none;
         }
 
         .requisitos li::before {
-            content: '✓';
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
             position: absolute;
             left: 0;
-            font-weight: bold;
-            font-size: 1.2rem;
+            color: var(--color-acento);
+            font-size: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .adopcion-incluye {
+            background: rgba(76, 175, 80, 0.12);
+            padding: 1.8rem;
+            border-radius: 16px;
+            margin: 2.2rem 0;
+            border-left: 3px solid var(--color-acento);
+        }
+
+        .adopcion-incluye p {
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin-bottom: 0.6rem;
+            color: var(--color-blanco);
+        }
+
+        .adopcion-incluye ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem 1.5rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: var(--color-texto-secundario);
+            font-weight: 300;
+        }
+
+        .adopcion-incluye li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .adopcion-incluye li i {
+            color: var(--color-acento);
+            font-size: 0.9rem;
         }
 
         /* ===== BOTÓN FLOTANTE WHATSAPP ===== */
         .whatsapp-float {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25D366;
+            bottom: 28px;
+            right: 28px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
-            width: 65px;
-            height: 65px;
+            width: 68px;
+            height: 68px;
             border-radius: 50%;
             text-align: center;
-            font-size: 2.5rem;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.45), 0 0 0 4px rgba(37, 211, 102, 0.15);
             z-index: 100;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            transition: all 0.3s;
-            animation: pulse 2s infinite;
+            transition: var(--transicion);
+            animation: pulse 2.2s infinite;
+            border: 3px solid rgba(255,255,255,0.9);
+        }
+
+        .whatsapp-float i {
+            font-size: 2.1rem;
+            font-weight: 400;
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 10px 35px rgba(37, 211, 102, 0.65), 0 0 0 4px rgba(37, 211, 102, 0.25);
             animation: none;
         }
 
         .whatsapp-tooltip {
             position: absolute;
-            right: 75px;
-            background: white;
+            right: 82px;
+            background: var(--color-card);
             color: var(--color-texto);
-            padding: 0.8rem 1.2rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            padding: 1rem 1.4rem;
+            border-radius: 14px;
+            font-size: 0.92rem;
             white-space: nowrap;
-            box-shadow: var(--sombra);
+            box-shadow: var(--sombra-lg);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s;
-            max-width: 250px;
-            font-size: 0.85rem;
-            line-height: 1.4;
+            transition: var(--transicion);
+            max-width: 280px;
+            font-weight: 300;
+            line-height: 1.5;
+            border: var(--borde-card);
+            z-index: 101;
+        }
+
+        .whatsapp-tooltip::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 8px 0 8px 8px;
+            border-style: solid;
+            border-color: transparent transparent transparent var(--color-card);
         }
 
         .whatsapp-float:hover .whatsapp-tooltip {
             opacity: 1;
             visibility: visible;
-            right: 80px;
+            right: 88px;
+        }
+
+        /* ===== CONTACTO ===== */
+        .contacto-container {
+            background: var(--color-card);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            border: var(--borde-card);
+            box-shadow: var(--sombra);
+        }
+
+        .contacto-container h2 {
+            margin-bottom: 1.8rem;
+            font-weight: 400;
+        }
+
+        .contacto-container > p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--color-texto-secundario);
+            font-weight: 300;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contacto-info {
+            max-width: 650px;
+            margin: 2.2rem auto;
+            text-align: left;
+        }
+
+        .contacto-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            padding: 1.1rem 0;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+        }
+
+        .contacto-item:last-child {
+            border-bottom: none;
+        }
+
+        .contacto-item i {
+            font-size: 1.4rem;
+            color: var(--color-primario);
+            min-width: 28px;
+            margin-top: 3px;
+        }
+
+        .contacto-item a,
+        .contacto-item span {
+            color: var(--color-texto);
+            text-decoration: none;
+            font-weight: 400;
+            transition: var(--transicion);
+            font-size: 1.05rem;
+        }
+
+        .contacto-item a:hover {
+            color: var(--color-secundario);
+        }
+
+        .contacto-item small {
+            display: block;
+            color: var(--color-texto-secundario);
+            font-weight: 300;
+            margin-top: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .nota-evento {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-top: 2.5rem;
+            font-style: italic;
+            color: var(--color-texto-secundario);
+            font-weight: 300;
+            line-height: 1.6;
+            padding-top: 1.8rem;
+            border-top: 1px dashed rgba(255,255,255,0.1);
         }
 
         /* ===== FOOTER ===== */
         footer {
-            background-color: var(--color-primario);
-            color: white;
+            background: linear-gradient(135deg, #0f0f0f, #151515);
+            color: var(--color-texto-secundario);
             text-align: center;
-            padding: 2.5rem 2rem;
-            margin-top: 4rem;
+            padding: 3rem 2rem 2.5rem;
+            margin-top: 3rem;
+            border-top: var(--borde-card);
+        }
+
+        footer p:first-child {
+            font-size: 1.3rem;
+            color: var(--color-blanco);
+            margin-bottom: 0.6rem;
+            font-weight: 400;
+            letter-spacing: -0.3px;
+        }
+
+        footer p:nth-child(2) {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 1.3rem;
+            font-weight: 300;
         }
 
         footer a {
-            color: var(--color-secundario);
+            color: var(--color-primario);
             text-decoration: none;
+            transition: var(--transicion);
+            font-weight: 400;
+            margin: 0 0.4rem;
+        }
+
+        footer a:hover {
+            color: var(--color-secundario);
+        }
+
+        footer p:last-child {
+            font-size: 0.9rem;
+            opacity: 0.75;
+            margin-top: 1.2rem;
+            font-weight: 300;
         }
 
         /* ===== ANIMACIONES ===== */
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-40px);
             }
             to {
                 opacity: 1;
@@ -428,7 +954,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -439,13 +965,29 @@
         @keyframes pulse {
             0%, 100% {
                 transform: scale(1);
+                box-shadow: 0 6px 25px rgba(37, 211, 102, 0.45), 0 0 0 4px rgba(37, 211, 102, 0.15);
             }
             50% {
-                transform: scale(1.05);
+                transform: scale(1.04);
+                box-shadow: 0 8px 30px rgba(37, 211, 102, 0.65), 0 0 0 6px rgba(37, 211, 102, 0.25);
             }
         }
 
         /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3.1rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .titulo-seccion {
+                font-size: 2.1rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
@@ -456,13 +998,15 @@
                 left: -100%;
                 top: 70px;
                 flex-direction: column;
-                background: linear-gradient(135deg, var(--color-primario), #0055A4);
+                background: rgba(15, 15, 15, 0.97);
                 width: 100%;
                 text-align: center;
-                transition: 0.3s;
+                transition: var(--transicion);
                 box-shadow: var(--sombra-lg);
-                padding: 2rem 0;
+                padding: 2.5rem 0;
                 gap: 0;
+                border-bottom: var(--borde-card);
+                backdrop-filter: blur(10px);
             }
 
             .nav-menu.active {
@@ -470,55 +1014,70 @@
             }
 
             .nav-menu li {
-                margin: 1rem 0;
+                margin: 0.8rem 0;
             }
 
             .nav-menu a {
-                padding: 1rem;
+                padding: 1rem 1.5rem;
                 display: block;
+                font-size: 1.1rem;
+            }
+
+            .nav-menu a::after {
+                display: none;
             }
 
             .hero {
-                margin-top: 60px;
-                min-height: 500px;
+                margin-top: 65px;
+                min-height: 550px;
             }
 
             .hero-content h1 {
-                font-size: 2.2rem;
+                font-size: 2.4rem;
+                letter-spacing: -0.5px;
             }
 
             .hero-content p {
                 font-size: 1.1rem;
             }
 
+            .btn-principal {
+                padding: 0.9rem 2rem;
+                font-size: 1rem;
+            }
+
             .titulo-seccion {
-                font-size: 2rem;
+                font-size: 1.9rem;
             }
 
             .seccion {
-                padding: 3rem 1rem;
+                padding: 4rem 1.5rem;
             }
 
             .actividades-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 1.6rem;
             }
 
             .cronograma-item {
                 flex-direction: column;
-                gap: 0.8rem;
+                gap: 1rem;
+                text-align: center;
             }
 
             .hora {
-                align-self: flex-start;
+                align-self: center;
             }
 
             .whatsapp-float {
-                width: 60px;
-                height: 60px;
-                font-size: 2rem;
-                bottom: 20px;
-                right: 20px;
+                width: 62px;
+                height: 62px;
+                bottom: 22px;
+                right: 22px;
+            }
+
+            .whatsapp-float i {
+                font-size: 1.9rem;
             }
 
             .whatsapp-tooltip {
@@ -526,29 +1085,99 @@
             }
 
             .galeria {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .galeria-item {
+                height: 240px;
             }
 
             .adopcion-destacado,
-            .ubicacion-box {
-                padding: 2rem 1.5rem;
+            .ubicacion-box,
+            .cronograma-container,
+            .galeria-container {
+                padding: 2.2rem 1.8rem;
             }
 
             .adopcion-destacado h2 {
                 font-size: 1.8rem;
             }
+
+            .ubicacion-box h3 {
+                font-size: 1.7rem;
+            }
+
+            .mapa-container {
+                height: 240px;
+            }
+
+            .ubicacion-detalles {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.9rem;
+            }
+
+            .contacto-container {
+                padding: 2.5rem 1.8rem;
+            }
         }
 
         @media (max-width: 480px) {
             .hero-content h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1.05rem;
             }
 
             .btn-principal {
-                padding: 0.8rem 1.8rem;
-                font-size: 1rem;
+                padding: 0.85rem 1.9rem;
+                font-size: 0.98rem;
+            }
+
+            .titulo-seccion {
+                font-size: 1.75rem;
+            }
+
+            .seccion-texto {
+                font-size: 1.05rem;
+            }
+
+            .actividad-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .hora {
+                min-width: 100px;
+                font-size: 0.9rem;
+                padding: 0.5rem 1.1rem;
+            }
+
+            .requisitos {
+                padding: 1.7rem;
+            }
+
+            .adopcion-incluye ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.6rem;
+            }
+
+            .lightbox-close {
+                top: -35px;
+                font-size: 1.9rem;
             }
         }
+
+        /* ===== UTILIDADES ===== */
+        .text-center { text-align: center; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mt-3 { margin-top: 3rem; }
+        .d-flex { display: flex; }
+        .align-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .gap-1 { gap: 1rem; }
     </style>
 </head>
 <body>
@@ -556,7 +1185,10 @@
     <!-- BARRA DE NAVEGACIÓN -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="nav-logo">🐕 Chihuatón TEBAEV</a>
+            <a href="#" class="nav-logo">
+                <i class="fa-solid fa-paw"></i>
+                Chihuatón TEBAEV
+            </a>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#actividades">Actividades</a></li>
@@ -576,73 +1208,88 @@
     <!-- HERO SECTION -->
     <section class="hero" id="inicio">
         <div class="hero-content">
-            <h1>🐾 Chihuatón 2026</h1>
+            <h1>Chihuatón 2026</h1>
             <p>Evento solidario de adopción responsable en TEBAEV Chocamán. 
-               ¡Ven a conocer a tus nuevos mejores amigos y vive una experiencia inolvidable!</p>
-            <a href="#adopcion" class="btn-principal">¡Quiero Adoptar! 🐶</a>
+               Conoce a tus nuevos mejores amigos y vive una experiencia inolvidable.</p>
+            <a href="#adopcion" class="btn-principal">
+                <i class="fa-solid fa-heart"></i>
+                Quiero Adoptar
+            </a>
         </div>
     </section>
 
     <!-- SOBRE EL EVENTO -->
     <section class="seccion">
         <h2 class="titulo-seccion">¿Qué es el Chihuatón?</h2>
-        <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
-            El <strong>Chihuatón</strong> es un evento comunitario organizado por el Telebachillerato  de Chocamán 
+        <p class="seccion-texto">
+            El <strong>Chihuatón</strong> es un evento comunitario organizado por el Telebachillerato de Chocamán 
             para promover la adopción responsable de perros, concientizar sobre el cuidado animal y fortalecer 
             los lazos de nuestra comunidad rural. Todas las actividades son <strong>gratuitas</strong> y abiertas al público.
         </p>
     </section>
 
-    <!-- GALERÍA DE IMÁGENES -->
-    <section class="seccion" id="galeria" style="background: white; border-radius: 16px; margin: 2rem auto;">
+    <!-- GALERÍA DE IMÁGENES CON ZOOM -->
+    <section class="seccion" id="galeria">
         <h2 class="titulo-seccion">Galería</h2>
-        <div class="galeria">
-            <div class="galeria-item">
-                <img src="ch1.jpg" alt="Cachorros en adopción - Chihuatón" loading="lazy">
-            </div>
-            <div class="galeria-item">
-                <img src="ch2.jpg" alt="Actividades con perros - Chihuatón" loading="lazy">
-            </div>
-            <div class="galeria-item">
-                <img src="ch3.jpg" alt="Evento comunitario - Chihuatón" loading="lazy">
-            </div>
-            <div class="galeria-item">
-                <img src="ch4.jpg" alt="Adopción responsable - Chihuatón" loading="lazy">
+        <div class="galeria-container">
+            <div class="galeria">
+                <div class="galeria-item" onclick="openLightbox(this)">
+                    <img src="ch1.jpg" alt="Cachorros en adopción - Chihuatón" loading="lazy">
+                </div>
+                <div class="galeria-item" onclick="openLightbox(this)">
+                    <img src="ch2.jpg" alt="Actividades con perros - Chihuatón" loading="lazy">
+                </div>
+                <div class="galeria-item" onclick="openLightbox(this)">
+                    <img src="ch3.jpg" alt="Evento comunitario - Chihuatón" loading="lazy">
+                </div>
+                <div class="galeria-item" onclick="openLightbox(this)">
+                    <img src="ch4.jpg" alt="Adopción responsable - Chihuatón" loading="lazy">
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- LIGHTBOX PARA ZOOM -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close" onclick="closeLightbox()">
+                <i class="fa-solid fa-xmark"></i>
+            </span>
+            <img src="" alt="Vista ampliada" class="lightbox-img" id="lightbox-img">
+        </div>
+    </div>
 
     <!-- ACTIVIDADES -->
     <section class="seccion" id="actividades">
         <h2 class="titulo-seccion">Actividades del Día</h2>
         <div class="actividades-grid">
             <div class="actividad-card">
-                <h3><span class="icono">🎤</span> Charlas Educativas</h3>
+                <h3><i class="fa-solid fa-microphone-lines"></i> Charlas Educativas</h3>
                 <p>Pláticas sobre tenencia responsable, salud animal, nutrición canina y prevención de maltrato, 
                    impartidas por estudiantes y especialistas invitados.</p>
             </div>
             <div class="actividad-card">
-                <h3><span class="icono">🎵</span> Música en Vivo</h3>
-                <p>Presentaciones musicales de talentos locales y del plantel. ¡Ambiente familiar y alegre 
-                   para disfrutar en comunidad!</p>
+                <h3><i class="fa-solid fa-music"></i> Música en Vivo</h3>
+                <p>Presentaciones musicales de talentos locales y del plantel. Ambiente familiar y alegre 
+                   para disfrutar en comunidad.</p>
             </div>
             <div class="actividad-card">
-                <h3><span class="icono">☕</span> Coffee Break</h3>
+                <h3><i class="fa-solid fa-mug-hot"></i> Coffee Break</h3>
                 <p>Espacio de convivencia con café, pan y postres. Los ingresos apoyan la causa animal 
-                   del evento. ¡Delicioso y solidario!</p>
+                   del evento. Delicioso y solidario.</p>
             </div>
             <div class="actividad-card">
-                <h3><span class="icono">🐾</span> Juegos con Cachorros</h3>
+                <h3><i class="fa-solid fa-dog"></i> Juegos con Cachorros</h3>
                 <p>Área segura y supervisada para interactuar con los perritos en adopción. Ideal para que 
                    niños y adultos conozcan a su futuro compañero.</p>
             </div>
             <div class="actividad-card">
-                <h3><span class="icono">🌟</span> Demostración de Talentos</h3>
-                <p>¡Los perritos también tienen talento! Observa habilidades, trucos y destrezas que te 
-                   enamorarán. ¡No te lo pierdas!</p>
+                <h3><i class="fa-solid fa-star"></i> Demostración de Talentos</h3>
+                <p>Los perritos también tienen talento. Observa habilidades, trucos y destrezas que te 
+                   enamorarán. No te lo pierdas.</p>
             </div>
             <div class="actividad-card">
-                <h3><span class="icono">📋</span> Asesoría de Adopción</h3>
+                <h3><i class="fa-solid fa-clipboard-check"></i> Asesoría de Adopción</h3>
                 <p>Personal capacitado te guiará en el proceso de adopción responsable, resolviendo dudas 
                    y acompañándote paso a paso.</p>
             </div>
@@ -650,94 +1297,106 @@
     </section>
 
     <!-- CRONOGRAMA -->
-    <section class="seccion" id="cronograma" style="background: white; border-radius: 16px;">
+    <section class="seccion" id="cronograma">
         <h2 class="titulo-seccion">Cronograma del Evento</h2>
-        <div class="cronograma">
+        <div class="cronograma-container">
             <div class="cronograma-item">
                 <span class="hora">9:00 AM</span>
                 <div>
-                    <strong>Registro y bienvenida</strong><br>
+                    <strong>Registro y bienvenida</strong>
                     Entrega de pulseras, programa del evento y recorrido inicial por el plantel
                 </div>
             </div>
             <div class="cronograma-item">
                 <span class="hora">9:30 AM</span>
                 <div>
-                    <strong>Charla inaugural</strong><br>
+                    <strong>Charla inaugural</strong>
                     "Por qué adoptar, no comprar" - Importancia de la adopción responsable
                 </div>
             </div>
             <div class="cronograma-item">
                 <span class="hora">10:30 AM</span>
                 <div>
-                    <strong>Actividades con cachorros</strong><br>
+                    <strong>Actividades con cachorros</strong>
                     Área de interacción supervisada - Conoce a los perritos disponibles
                 </div>
             </div>
             <div class="cronograma-item">
                 <span class="hora">12:00 PM</span>
                 <div>
-                    <strong>Coffee Break comunitario</strong> 🥐☕<br>
+                    <strong>Coffee Break comunitario</strong>
                     Espacio de convivencia y networking
                 </div>
             </div>
             <div class="cronograma-item">
                 <span class="hora">1:00 PM</span>
                 <div>
-                    <strong>Demostración de talentos caninos</strong> 🎪<br>
-                    ¡Los perritos muestran sus mejores trucos!
+                    <strong>Demostración de talentos caninos</strong>
+                    Los perritos muestran sus mejores trucos
                 </div>
             </div>
             <div class="cronograma-item">
                 <span class="hora">2:30 PM</span>
                 <div>
-                    <strong>Proceso formal de adopción</strong><br>
+                    <strong>Proceso formal de adopción</strong>
                     Entrega responsable, firma de compromisos y entrega de perritos
                 </div>
             </div>
             <div class="cronograma-item">
                 <span class="hora">4:00 PM</span>
                 <div>
-                    <strong>Cierre musical y agradecimientos</strong> 🎶<br>
+                    <strong>Cierre musical y agradecimientos</strong>
                     Despedida con música en vivo y fotos grupales
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- UBICACIÓN -->
+    <!-- UBICACIÓN CON MAPA -->
     <section class="seccion" id="ubicacion">
         <div class="ubicacion-box">
-            <h3>📍 ¿Dónde nos encontramos?</h3>
-            <p style="font-size: 1.2rem; margin-bottom: 1rem;">
+            <h3><i class="fa-solid fa-location-dot"></i> ¿Dónde nos encontramos?</h3>
+            <p>
                 <strong>Telebachillerato de Chocamán (TEBAEV)</strong><br>
                 Chocamán, Veracruz - Zona Rural
             </p>
-            <p style="margin: 1.5rem 0;">
-                🗺️ 
-                <a href="https://maps.app.goo.gl/CgwycpRLZUg2qeix5" target="_blank" rel="noopener">
-                    Ver ubicación en Google Maps →
-                </a>
-            </p>
-            <p style="margin-top: 1.5rem; font-size: 1rem; opacity: 0.95;">
-                ✓ Acceso gratuito &nbsp;|&nbsp; 
-                ✓ Estacionamiento disponible &nbsp;|&nbsp; 
-                ✓ Transporte comunitario coordinado
-            </p>
+            
+            <div class="mapa-container">
+                <!-- Placeholder para mapa - reemplazar con iframe real de Google Maps -->
+                <div class="mapa-placeholder">
+                    <i class="fa-solid fa-map"></i>
+                    <p>Mapa interactivo de Google Maps</p>
+                    <small>Chocamán, Veracruz, México</small>
+                </div>
+                <!-- Para usar el mapa real, descomentar y ajustar el iframe:
+                <iframe src="https://www.google.com/maps/embed?pb=..." allowfullscreen loading="lazy"></iframe>
+                -->
+            </div>
+            
+            <a href="https://maps.app.goo.gl/CgwycpRLZUg2qeix5" target="_blank" rel="noopener">
+                <i class="fa-solid fa-external-link-alt"></i>
+                Ver ubicación completa en Google Maps
+            </a>
+            
+            <div class="ubicacion-detalles">
+                <span><i class="fa-solid fa-check"></i> Acceso gratuito</span>
+                <span><i class="fa-solid fa-check"></i> Estacionamiento disponible</span>
+                <span><i class="fa-solid fa-check"></i> Transporte comunitario coordinado</span>
+            </div>
         </div>
     </section>
 
     <!-- ADOPCIÓN -->
     <section class="seccion" id="adopcion">
         <div class="adopcion-destacado">
-            <h2>🏠 ¡Hazlo Oficial: Proceso de Adopción!</h2>
-            <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
+            <h2><i class="fa-solid fa-house-chimney"></i> Proceso de Adopción</h2>
+            <p>
                 Al finalizar las actividades, podrás iniciar el trámite de adopción responsable 
                 con apoyo de nuestro equipo capacitado.
             </p>
             
             <div class="requisitos">
-                <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">✅ Requisitos para adoptar:</h3>
+                <h3><i class="fa-solid fa-list-check"></i> Requisitos para adoptar:</h3>
                 <ul>
                     <li>Ser mayor de 18 años (o contar con autorización de tutor)</li>
                     <li>Identificación oficial vigente (INE, pasaporte o credencial escolar)</li>
@@ -748,81 +1407,91 @@
                 </ul>
             </div>
             
-            <div style="background: rgba(255,255,255,0.2); padding: 1.5rem; border-radius: 12px; margin: 2rem 0;">
-                <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem;">
-                    🎁 Cada adopción incluye:
-                </p>
-                <p>Cartilla de vacunación • Desparasitación • Kit de bienvenida • Asesoría veterinaria inicial</p>
+            <div class="adopcion-incluye">
+                <p><i class="fa-solid fa-gift"></i> Cada adopción incluye:</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Cartilla de vacunación</li>
+                    <li><i class="fa-solid fa-check"></i> Desparasitación</li>
+                    <li><i class="fa-solid fa-check"></i> Kit de bienvenida</li>
+                    <li><i class="fa-solid fa-check"></i> Asesoría veterinaria inicial</li>
+                </ul>
             </div>
 
-            <a href="https://wa.me/522711401708?text=quiero%20informes%20del%20chihuatón%20tebaev%20chocaman" 
+            <a href="https://wa.me/522711401708?text=Holaa,%20estoy%20interesado%20en%20el%20evento%20Chihuatón" 
                class="btn-principal" 
-               style="background: white; color: var(--color-acento); margin-top: 1rem; display: inline-block;"
+               style="background: linear-gradient(135deg, var(--color-acento), #3d8b40); margin-top: 1rem;"
                target="_blank"
                rel="noopener">
-                💬 Reservar mi lugar por WhatsApp
+                <i class="fa-brands fa-whatsapp"></i>
+                Reservar mi lugar por WhatsApp
             </a>
         </div>
     </section>
 
     <!-- CONTACTO -->
-    <section class="seccion" style="text-align: center; background: white; border-radius: 16px;">
-        <h2 class="titulo-seccion">¿Preguntas?</h2>
-        <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
-            Contáctanos para más información o para voluntariarte en el evento:
-        </p>
-        <div style="max-width: 600px; margin: 2rem auto;">
-            <p style="margin: 1rem 0; font-size: 1.1rem;">
-                📧 <a href="mailto:tebaev.chocaman@veracruz.gob.mx" 
-                      style="color: var(--color-primario); font-weight: bold; text-decoration: none;">
-                      tebaev.chocaman@veracruz.gob.mx
-                </a>
+    <section class="seccion">
+        <div class="contacto-container">
+            <h2 class="titulo-seccion">¿Preguntas?</h2>
+            <p>
+                Contáctanos para más información o para voluntariarte en el evento:
             </p>
-            <p style="margin: 1rem 0; font-size: 1.1rem;">
-                📱 <strong>WhatsApp:</strong> 271 140 1708
-            </p>
-            <p style="margin: 1rem 0; font-size: 1.1rem;">
-                💬 <strong>Facebook:</strong> TEBAEV Chocamán
+            <div class="contacto-info">
+                <div class="contacto-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <a href="mailto:tebaev.chocaman@veracruz.gob.mx">tebaev.chocaman@veracruz.gob.mx</a>
+                        <small>Respuesta en menos de 24 horas</small>
+                    </div>
+                </div>
+                <div class="contacto-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <div>
+                        <span>271 140 1708</span>
+                        <small>Atención de lunes a viernes, 9 AM - 6 PM</small>
+                    </div>
+                </div>
+                <div class="contacto-item">
+                    <i class="fa-brands fa-facebook"></i>
+                    <div>
+                        <span>TEBAEV Chocamán</span>
+                        <small>Síguenos para actualizaciones del evento</small>
+                    </div>
+                </div>
+            </div>
+            <p class="nota-evento">
+                Este evento se realiza en el marco del proyecto educativo de vinculación comunitaria 
+                del Telebachillerato de Chocamán, Veracruz.
             </p>
         </div>
-        <p style="font-size: 0.95rem; opacity: 0.8; margin-top: 2rem; font-style: italic;">
-            Este evento se realiza en el marco del proyecto educativo de vinculación comunitaria 
-            del Telebachillerato de Chocamán, Veracruz.
-        </p>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">🐾 Chihuatón TEBAEV Chocamán 2026</p>
-        <p style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 1rem;">
-            Telebachillerato de Chocamán, Veracruz
-        </p>
-        <p style="font-size: 0.9rem; opacity: 0.8;">
-            Diseñado con ❤️ para comunidades rurales • 
+        <p>Chihuatón TEBAEV Chocamán 2026</p>
+        <p>Telebachillerato de Chocamán, Veracruz</p>
+        <p>
+            Diseñado con <i class="fa-solid fa-heart" style="color:#ff6b6b;margin:0 3px"></i> para Cultura Digital • 
             <a href="#">Política de privacidad</a> • 
             <a href="#">Términos y condiciones</a>
         </p>
-        <p style="font-size: 0.85rem; opacity: 0.7; margin-top: 1rem;">
+        <p>
             &copy; 2026 Todos los derechos reservados
         </p>
     </footer>
 
     <!-- BOTÓN FLOTANTE DE WHATSAPP -->
-    <a href="https://wa.me/522711401708?text=quiero%20informes%20del%20chihuatón%20tebaev%20chocaman" 
+    <a href="https://wa.me/522711401708?text=Holaa,%20estoy%20interesado%20en%20el%20evento%20Chihuatón" 
        class="whatsapp-float" 
        target="_blank" 
        rel="noopener"
        aria-label="Contactar por WhatsApp">
-        <svg width="35" height="35" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-        </svg>
+        <i class="fa-brands fa-whatsapp"></i>
         <span class="whatsapp-tooltip">
-            ¡Hola! 👋<br>
-            quiero informes del chihuatón tebaev chocaman
+            Holaa, estoy interesado en el evento Chihuatón
         </span>
     </a>
 
-    <!-- SCRIPT PARA MENÚ RESPONSIVE -->
+    <!-- SCRIPTS -->
     <script>
         // Menú hamburguesa
         const hamburger = document.getElementById('hamburger');
@@ -834,9 +1503,9 @@
             // Animación del hamburger
             const spans = hamburger.querySelectorAll('span');
             if (navMenu.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
                 spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
             } else {
                 spans[0].style.transform = 'none';
                 spans[1].style.opacity = '1';
@@ -859,9 +1528,43 @@
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
-                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+                navbar.style.background = 'rgba(10, 10, 10, 0.97)';
+                navbar.style.boxShadow = '0 6px 25px rgba(0,0,0,0.5)';
             } else {
-                navbar.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                navbar.style.background = 'rgba(10, 10, 10, 0.92)';
+                navbar.style.boxShadow = 'var(--sombra)';
+            }
+        });
+
+        // Lightbox para galería
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const img = element.querySelector('img');
+            
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Cerrar lightbox al hacer clic fuera de la imagen
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') {
+                closeLightbox();
+            }
+        });
+
+        // Cerrar lightbox con tecla Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
             }
         });
 
@@ -876,17 +1579,34 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        // Observar cards de actividades
-        document.querySelectorAll('.actividad-card, .cronograma-item, .galeria-item').forEach(el => {
+        // Observar elementos para animación
+        document.querySelectorAll('.actividad-card, .cronograma-item, .galeria-item, .seccion-texto').forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            el.style.transform = 'translateY(25px)';
+            el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
             observer.observe(el);
         });
+
+        // Inicializar elementos visibles
+        document.querySelectorAll('.actividad-card, .cronograma-item, .galeria-item, .seccion-texto').forEach(el => {
+            if (isElementInViewport(el)) {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }
+        });
+
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.bottom >= 0
+            );
+        }
     </script>
 </body>
 </html>
