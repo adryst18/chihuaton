@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chihuaton TEBAEV Chocamán - Evento de adopción responsable de perros en telebachillerato rural">
+    <title>Chihuaton TEBAEV Chocamán | Evento de Adopción</title>
+    <style>
+        /* ===== VARIABLES Y RESET ===== */
+        :root {
+            --color-primario: #003366;
+            --color-secundario: #FF6600;
+            --color-acento: #28A745;
+            --color-fondo: #F8F9FA;
+            --color-texto: #333333;
+            --color-blanco: #FFFFFF;
+            --sombra: 0 4px 6px rgba(0,0,0,0.1);
+            --sombra-lg: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            line-height: 1.6;
+        }
+
+        /* ===== BARRA DE NAVEGACIÓN ===== */
+        .navbar {
+            background: linear-gradient(135deg, var(--color-primario), #0055A4);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--sombra-lg);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            color: var(--color-blanco);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--color-blanco);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem;
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-secundario);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color-blanco);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+
+        /* ===== HERO SECTION CON IMAGEN ===== */
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(rgba(0,51,102,0.85), rgba(0,51,102,0.85)),
+                        url('ch1.jpg') center/cover;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-blanco);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .btn-principal {
+            display: inline-block;
+            background-color: var(--color-secundario);
+            color: var(--color-blanco);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: var(--sombra-lg);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn-principal:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,102,0,0.4);
+        }
+
+        /* ===== SECCIONES GENERALES ===== */
+        .seccion {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--color-primario);
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .titulo-seccion::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--color-secundario);
+            border-radius: 2px;
+        }
+
+        /* ===== GALERÍA DE IMÁGENES ===== */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .galeria-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            transition: transform 0.3s;
+            height: 300px;
+        }
+
+        .galeria-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-lg);
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ===== ACTIVIDADES ===== */
+        .actividades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .actividad-card {
+            background: var(--color-blanco);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--sombra);
+            border-left: 5px solid var(--color-secundario);
+            transition: all 0.3s;
+        }
+
+        .actividad-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-lg);
+        }
+
+        .actividad-card h3 {
+            color: var(--color-primario);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        .icono {
+            font-size: 2rem;
+        }
+
+        /* ===== CRONOGRAMA ===== */
+        .cronograma {
+            background: var(--color-blanco);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--sombra);
+        }
+
+        .cronograma-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 2px dashed #e0e0e0;
+            transition: background 0.3s;
+        }
+
+        .cronograma-item:hover {
+            background: #f8f9fa;
+            padding-left: 1rem;
+            border-radius: 8px;
+        }
+
+        .cronograma-item:last-child {
+            border-bottom: none;
+        }
+
+        .hora {
+            background: linear-gradient(135deg, var(--color-primario), #0055A4);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-weight: bold;
+            min-width: 100px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* ===== UBICACIÓN ===== */
+        .ubicacion-box {
+            background: linear-gradient(135deg, var(--color-primario), #004499);
+            color: white;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: var(--sombra-lg);
+        }
+
+        .ubicacion-box h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ubicacion-box a {
+            color: var(--color-secundario);
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .ubicacion-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== ADOPCIÓN ===== */
+        .adopcion-destacado {
+            background: linear-gradient(135deg, var(--color-acento), #218838);
+            color: white;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .adopcion-destacado h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .requisitos {
+            text-align: left;
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(255,255,255,0.15);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .requisitos ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .requisitos li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .requisitos li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* ===== BOTÓN FLOTANTE WHATSAPP ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 2.5rem;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+            animation: none;
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 75px;
+            background: white;
+            color: var(--color-texto);
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            box-shadow: var(--sombra);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            max-width: 250px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 80px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--color-primario);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 2rem;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: var(--color-secundario);
+            text-decoration: none;
+        }
+
+        /* ===== ANIMACIONES ===== */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: linear-gradient(135deg, var(--color-primario), #0055A4);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--sombra-lg);
+                padding: 2rem 0;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 1rem 0;
+            }
+
+            .nav-menu a {
+                padding: 1rem;
+                display: block;
+            }
+
+            .hero {
+                margin-top: 60px;
+                min-height: 500px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .titulo-seccion {
+                font-size: 2rem;
+            }
+
+            .seccion {
+                padding: 3rem 1rem;
+            }
+
+            .actividades-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .cronograma-item {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .hora {
+                align-self: flex-start;
+            }
+
+            .whatsapp-float {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .whatsapp-tooltip {
+                display: none;
+            }
+
+            .galeria {
+                grid-template-columns: 1fr;
+            }
+
+            .adopcion-destacado,
+            .ubicacion-box {
+                padding: 2rem 1.5rem;
+            }
+
+            .adopcion-destacado h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn-principal {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">🐕 Chihuaton TEBAEV</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#actividades">Actividades</a></li>
+                <li><a href="#cronograma">Cronograma</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#adopcion">Adopción</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>🐾 CHIHUATON 2026</h1>
+            <p>Evento solidario de adopción responsable en TEBAEV Chocamán. 
+               ¡Ven a conocer a tus nuevos mejores amigos y vive una experiencia inolvidable!</p>
+            <a href="#adopcion" class="btn-principal">¡Quiero Adoptar! 🐶</a>
+        </div>
+    </section>
+
+    <!-- SOBRE EL EVENTO -->
+    <section class="seccion">
+        <h2 class="titulo-seccion">¿Qué es el Chihuaton?</h2>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
+            El <strong>Chihuaton</strong> es un evento comunitario organizado por el Telebachillerato Estatal de Chocamán 
+            para promover la adopción responsable de perros, concientizar sobre el cuidado animal y fortalecer 
+            los lazos de nuestra comunidad rural. Todas las actividades son <strong>gratuitas</strong> y abiertas al público.
+        </p>
+    </section>
+
+    <!-- GALERÍA DE IMÁGENES -->
+    <section class="seccion" id="galeria" style="background: white; border-radius: 16px; margin: 2rem auto;">
+        <h2 class="titulo-seccion">Galería</h2>
+        <div class="galeria">
+            <div class="galeria-item">
+                <img src="ch1.jpg" alt="Cachorros en adopción - Chihuaton" loading="lazy">
+            </div>
+            <div class="galeria-item">
+                <img src="ch2.jpg" alt="Actividades con perros - Chihuaton" loading="lazy">
+            </div>
+            <div class="galeria-item">
+                <img src="ch3.jpg" alt="Evento comunitario - Chihuaton" loading="lazy">
+            </div>
+            <div class="galeria-item">
+                <img src="ch4.jpg" alt="Adopción responsable - Chihuaton" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- ACTIVIDADES -->
+    <section class="seccion" id="actividades">
+        <h2 class="titulo-seccion">Actividades del Día</h2>
+        <div class="actividades-grid">
+            <div class="actividad-card">
+                <h3><span class="icono">🎤</span> Charlas Educativas</h3>
+                <p>Pláticas sobre tenencia responsable, salud animal, nutrición canina y prevención de maltrato, 
+                   impartidas por estudiantes y especialistas invitados.</p>
+            </div>
+            <div class="actividad-card">
+                <h3><span class="icono">🎵</span> Música en Vivo</h3>
+                <p>Presentaciones musicales de talentos locales y del plantel. ¡Ambiente familiar y alegre 
+                   para disfrutar en comunidad!</p>
+            </div>
+            <div class="actividad-card">
+                <h3><span class="icono">☕</span> Coffee Break</h3>
+                <p>Espacio de convivencia con café, pan y postres. Los ingresos apoyan la causa animal 
+                   del evento. ¡Delicioso y solidario!</p>
+            </div>
+            <div class="actividad-card">
+                <h3><span class="icono">🐾</span> Juegos con Cachorros</h3>
+                <p>Área segura y supervisada para interactuar con los perritos en adopción. Ideal para que 
+                   niños y adultos conozcan a su futuro compañero.</p>
+            </div>
+            <div class="actividad-card">
+                <h3><span class="icono">🌟</span> Demostración de Talentos</h3>
+                <p>¡Los perritos también tienen talento! Observa habilidades, trucos y destrezas que te 
+                   enamorarán. ¡No te lo pierdas!</p>
+            </div>
+            <div class="actividad-card">
+                <h3><span class="icono">📋</span> Asesoría de Adopción</h3>
+                <p>Personal capacitado te guiará en el proceso de adopción responsable, resolviendo dudas 
+                   y acompañándote paso a paso.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CRONOGRAMA -->
+    <section class="seccion" id="cronograma" style="background: white; border-radius: 16px;">
+        <h2 class="titulo-seccion">Cronograma del Evento</h2>
+        <div class="cronograma">
+            <div class="cronograma-item">
+                <span class="hora">9:00 AM</span>
+                <div>
+                    <strong>Registro y bienvenida</strong><br>
+                    Entrega de pulseras, programa del evento y recorrido inicial por el plantel
+                </div>
+            </div>
+            <div class="cronograma-item">
+                <span class="hora">9:30 AM</span>
+                <div>
+                    <strong>Charla inaugural</strong><br>
+                    "Por qué adoptar, no comprar" - Importancia de la adopción responsable
+                </div>
+            </div>
+            <div class="cronograma-item">
+                <span class="hora">10:30 AM</span>
+                <div>
+                    <strong>Actividades con cachorros</strong><br>
+                    Área de interacción supervisada - Conoce a los perritos disponibles
+                </div>
+            </div>
+            <div class="cronograma-item">
+                <span class="hora">12:00 PM</span>
+                <div>
+                    <strong>Coffee Break comunitario</strong> 🥐☕<br>
+                    Espacio de convivencia y networking
+                </div>
+            </div>
+            <div class="cronograma-item">
+                <span class="hora">1:00 PM</span>
+                <div>
+                    <strong>Demostración de talentos caninos</strong> 🎪<br>
+                    ¡Los perritos muestran sus mejores trucos!
+                </div>
+            </div>
+            <div class="cronograma-item">
+                <span class="hora">2:30 PM</span>
+                <div>
+                    <strong>Proceso formal de adopción</strong><br>
+                    Entrega responsable, firma de compromisos y entrega de perritos
+                </div>
+            </div>
+            <div class="cronograma-item">
+                <span class="hora">4:00 PM</span>
+                <div>
+                    <strong>Cierre musical y agradecimientos</strong> 🎶<br>
+                    Despedida con música en vivo y fotos grupales
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UBICACIÓN -->
+    <section class="seccion" id="ubicacion">
+        <div class="ubicacion-box">
+            <h3>📍 ¿Dónde nos encontramos?</h3>
+            <p style="font-size: 1.2rem; margin-bottom: 1rem;">
+                <strong>Telebachillerato Estatal de Chocamán (TEBAEV)</strong><br>
+                Chocamán, Veracruz - Zona Rural
+            </p>
+            <p style="margin: 1.5rem 0;">
+                🗺️ 
+                <a href="https://maps.app.goo.gl/CgwycpRLZUg2qeix5" target="_blank" rel="noopener">
+                    Ver ubicación en Google Maps →
+                </a>
+            </p>
+            <p style="margin-top: 1.5rem; font-size: 1rem; opacity: 0.95;">
+                ✓ Acceso gratuito &nbsp;|&nbsp; 
+                ✓ Estacionamiento disponible &nbsp;|&nbsp; 
+                ✓ Transporte comunitario coordinado
+            </p>
+        </div>
+    </section>
+
+    <!-- ADOPCIÓN -->
+    <section class="seccion" id="adopcion">
+        <div class="adopcion-destacado">
+            <h2>🏠 ¡Hazlo Oficial: Proceso de Adopción!</h2>
+            <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
+                Al finalizar las actividades, podrás iniciar el trámite de adopción responsable 
+                con apoyo de nuestro equipo capacitado.
+            </p>
+            
+            <div class="requisitos">
+                <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">✅ Requisitos para adoptar:</h3>
+                <ul>
+                    <li>Ser mayor de 18 años (o contar con autorización de tutor)</li>
+                    <li>Identificación oficial vigente (INE, pasaporte o credencial escolar)</li>
+                    <li>Compromiso firmado de cuidado responsable</li>
+                    <li>Entrevista breve con el comité de adopción</li>
+                    <li>Disponibilidad para seguimiento post-adopción</li>
+                    <li>Carta de compromiso de bienestar animal</li>
+                </ul>
+            </div>
+            
+            <div style="background: rgba(255,255,255,0.2); padding: 1.5rem; border-radius: 12px; margin: 2rem 0;">
+                <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem;">
+                    🎁 Cada adopción incluye:
+                </p>
+                <p>Cartilla de vacunación • Desparasitación • Kit de bienvenida • Asesoría veterinaria inicial</p>
+            </div>
+
+            <a href="https://wa.me/522711401708?text=quiero%20informes%20del%20chihuatón%20tebaev%20chocaman" 
+               class="btn-principal" 
+               style="background: white; color: var(--color-acento); margin-top: 1rem; display: inline-block;"
+               target="_blank"
+               rel="noopener">
+                💬 Reservar mi lugar por WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="seccion" style="text-align: center; background: white; border-radius: 16px;">
+        <h2 class="titulo-seccion">¿Preguntas?</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+            Contáctanos para más información o para voluntariarte en el evento:
+        </p>
+        <div style="max-width: 600px; margin: 2rem auto;">
+            <p style="margin: 1rem 0; font-size: 1.1rem;">
+                📧 <a href="mailto:tebaev.chocaman@veracruz.gob.mx" 
+                      style="color: var(--color-primario); font-weight: bold; text-decoration: none;">
+                      tebaev.chocaman@veracruz.gob.mx
+                </a>
+            </p>
+            <p style="margin: 1rem 0; font-size: 1.1rem;">
+                📱 <strong>WhatsApp:</strong> 271 140 1708
+            </p>
+            <p style="margin: 1rem 0; font-size: 1.1rem;">
+                💬 <strong>Facebook:</strong> TEBAEV Chocamán
+            </p>
+        </div>
+        <p style="font-size: 0.95rem; opacity: 0.8; margin-top: 2rem; font-style: italic;">
+            Este evento se realiza en el marco del proyecto educativo de vinculación comunitaria 
+            del Telebachillerato Estatal de Chocamán, Veracruz.
+        </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">🐾 Chihuaton TEBAEV Chocamán 2026</p>
+        <p style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 1rem;">
+            Telebachillerato Estatal de Chocamán, Veracruz
+        </p>
+        <p style="font-size: 0.9rem; opacity: 0.8;">
+            Diseñado con ❤️ para comunidades rurales • 
+            <a href="#">Política de privacidad</a> • 
+            <a href="#">Términos y condiciones</a>
+        </p>
+        <p style="font-size: 0.85rem; opacity: 0.7; margin-top: 1rem;">
+            &copy; 2026 Todos los derechos reservados
+        </p>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/522711401708?text=quiero%20informes%20del%20chihuatón%20tebaev%20chocaman" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener"
+       aria-label="Contactar por WhatsApp">
+        <svg width="35" height="35" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        <span class="whatsapp-tooltip">
+            ¡Hola! 👋<br>
+            quiero informes del chihuatón tebaev chocaman
+        </span>
+    </a>
+
+    <!-- SCRIPT PARA MENÚ RESPONSIVE -->
+    <script>
+        // Menú hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            
+            // Animación del hamburger
+            const spans = hamburger.querySelectorAll('span');
+            if (navMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+
+        // Efecto de navbar al hacer scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+            } else {
+                navbar.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Animación de elementos al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar cards de actividades
+        document.querySelectorAll('.actividad-card, .cronograma-item, .galeria-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
